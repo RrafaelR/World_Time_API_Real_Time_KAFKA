@@ -20,7 +20,7 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 # 1. Inicia Kafka e Zookeeper
-echo -e "${YELLOW}📦 Iniciando Kafka e Zookeeper...${NC}"
+echo -e "${YELLOW}📦 Iniciando Kafka ...${NC}"
 docker compose up -d
 
 echo "⏳ Aguardando Kafka inicializar (30 segundos)..."
