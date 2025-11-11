@@ -11,10 +11,10 @@ const producer = kafka.producer();
 const TOPIC = "world-times";
 
 const timezones = [
-  { zone: 'America/Sao_Paulo', partition: 0, group: 'Américas' },
-  { zone: 'America/New_York', partition: 1, group: 'Américas' },
-  { zone: 'Europe/London', partition: 2, group: 'Europa' },
-  { zone: 'Asia/Tokyo', partition: 3, group: 'Ásia' },
+//   { zone: 'America/Sao_Paulo', partition: 0, group: 'Américas' },
+//   { zone: 'America/New_York', partition: 1, group: 'Américas' },
+//   { zone: 'Europe/London', partition: 2, group: 'Europa' },
+//   { zone: 'Asia/Tokyo', partition: 3, group: 'Ásia' },
   { zone: 'Australia/Sydney', partition: 4, group: 'Oceania' }
 ];
 
@@ -55,10 +55,10 @@ async function fetchAndPublish(){
                     messageCount++;
                     console.log(
                         `📤 [${new Date().toLocaleTimeString('pt-BR')}] ` +
-                        `Published: ${zone} (Partition ${partition}) - ${data.datetime}`
+                        `Published: ${zone} (Partition ${partition}) - ${date.datetime}`
                     );
                 } catch (error) {
-                    console.log(`❌ Error trying to get ${zone}: `, error);
+                    console.log(`❌ Error trying to get ${zone}: `);
                 }
             }
             console.log(`\n📊 Total of sent messages: ${messageCount}\n`);
