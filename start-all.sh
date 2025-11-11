@@ -8,26 +8,22 @@ echo "=============================================="
 echo ""
 
 # Cores para output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
 
 # Verifica se o Docker está rodando
 if ! docker info > /dev/null 2>&1; then
-    echo -e "${RED}❌ Docker não está rodando!${NC}"
+    echo -e "❌ Docker não está rodando!"
     exit 1
 fi
 
 # 1. Inicia Kafka e Zookeeper
-echo -e "${YELLOW}📦 Iniciando Kafka ...${NC}"
+echo -e "📦 Iniciando Kafka ..."
 docker compose up -d
 
 echo "⏳ Aguardando Kafka inicializar (30 segundos)..."
 sleep 30
 
 # 2. Cria o tópico com 5 partições
-echo -e "${YELLOW}📋 Criando tópico 'world-times' com 5 partições...${NC}"
+echo -e "📋 Criando tópico 'world-times' com 5 partições..."
 docker exec kafka kafka-topics \
   --create \
   --topic world-times \
@@ -36,28 +32,26 @@ docker exec kafka kafka-topics \
   --replication-factor 1 \
   --if-not-exists
 
-echo -e "${GREEN}✅ Tópico criado com sucesso!${NC}"
+echo -e "✅ Tópico criado com sucesso!"
 echo ""
 
 # 3. Mostra informações do tópico
-echo -e "${YELLOW}📊 Informações do tópico:${NC}"
+echo -e "📊 Informações do tópico:"
 docker exec kafka kafka-topics \
   --describe \
   --topic world-times \
   --bootstrap-server localhost:9092
 
 echo ""
-echo -e "${GREEN}=============================================="
+echo -e "=============================================="
 echo "✅ Kafka está pronto!"
 echo "=============================================="
 echo ""
-echo "Agora abra 5 terminais e execute:"
+echo "Agora abra 3 terminais e execute:"
 echo ""
-echo "  Terminal 1: ${YELLOW}node consumer/index.js america_sp${NC}"
-echo "  Terminal 2: ${YELLOW}node consumer/index.js america_ny${NC}"
-echo "  Terminal 3: ${YELLOW}node consumer/index.js europe${NC}"
-echo "  Terminal 4: ${YELLOW}node consumer/index.js asia${NC}"
-echo "  Terminal 5: ${YELLOW}node consumer/index.js oceania${NC}"
+echo "  Terminal 1: node consumer/index.js"
+echo "  Terminal 2: node producer/index.js$"
+echo "  Terminal 3: ./monitor.sh"
 echo ""
-echo "Para parar tudo: ${RED}docker-compose down${NC}"
+echo "Para parar tudo: docker-compose down"
 echo ""
