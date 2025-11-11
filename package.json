@@ -1,0 +1,26 @@
+{
+  "name": "world-time-streaming-kafka",
+  "version": "1.0.0",
+  "description": "Streaming of mundial time zones with Kafka and Consumer Groups",
+  "main": "index.js",
+  "scripts": {
+    "producer": "node producer/index.js",
+    "consumer": "node consumer-generic/index.js",
+    "consumer:americas": "node consumer-generic/index.js americas",
+    "consumer:europa": "node consumer-generic/index.js europa",
+    "consumer:asia": "node consumer-generic/index.js asia",
+    "consumer:oceania": "node consumer-generic/index.js oceania"
+  },
+  "keywords": [
+    "kafka",
+    "streaming",
+    "world-time",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "axios": "^1.6.0"
+  }
+}
